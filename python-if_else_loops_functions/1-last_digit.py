@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 import random
 number = random.randint(-10000, 10000)
 string = 'Last digit of'
@@ -14,4 +15,3 @@ elif last_digit == 0:
     print(f'{string} {number} is {last_digit} and is 0')
 else:
     print(f'{string} {number} is {last_digit} and is less than 6 and not 0')
-    
