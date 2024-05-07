@@ -6,6 +6,11 @@ if __name__ == "__main__":
     num_argv = len(argv) - 1
     total = 0
 
-for arg in argv[1:]:
+if num_argv == 0:
+    print("0")
+elif num_argv == 1:
+    print("1")
+else:
+    for arg in argv[1:]:
         total += int(arg)
-        print(total)
+    print(total)
