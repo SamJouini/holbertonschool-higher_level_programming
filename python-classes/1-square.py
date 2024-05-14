@@ -7,5 +7,4 @@ class Square():
         "Initializes a Square instance with a given size."
         self.__size = size
         "Set the private __size attribute to the provided size"
-
     pass
