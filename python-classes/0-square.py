@@ -3,5 +3,5 @@
 
 
 class Square:
-    None
     "Class is curently empty."
+    None
