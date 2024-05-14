@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-"Defines a square with a private size attribute and validation."
 
 
 class Square:
+    "Defines a square with a private size attribute and validation."
     def __init__(self, size=0):
         "Initializes a Square instance with a given size."
         if not isinstance(size, int):
