@@ -4,6 +4,5 @@
 
 
 class Square:
-    Attributes:
-        "Class is curently empty."
-        None
+    "Class is curently empty."
+    None
