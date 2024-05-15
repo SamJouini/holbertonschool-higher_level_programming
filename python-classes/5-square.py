@@ -9,7 +9,7 @@ class Square:
         "Initializes a Square instance with a given size."
         self.size = size
 
-    @property
+    @property  # Getter for the size attribute
     def size(self):
         "Retrieves the size of the square."
         return self.__size
