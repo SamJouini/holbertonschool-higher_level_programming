@@ -1,2 +1,3 @@
 #!/usr/bin/python3
-import __hello__
+
+import pythonisfun
