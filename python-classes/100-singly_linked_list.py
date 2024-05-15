@@ -33,3 +33,39 @@ class Node:
             "Raise a TypeError if the value is not None or a Node object"
             raise TypeError("next_node must be a Node object")
         self.__next_node = value
+
+
+class SinglyLinkedList:
+    "Initialize the head of the linked list to None"
+    def __init__(self):
+        self._head = None
+
+    def __str__(self):
+        "String representation of the linked list"
+        result = ""
+        current_node = self._head
+        while current_node:
+            "Append the data of each node to the result string"
+            result += str(current_node.data) + "\n"
+            current_node = current_node.next_node
+        return result.strip()
+
+    def sorted_insert(self, value):
+        "Create a new node with the given value"
+        new_node = Node(value)
+
+        if not self._head or value < self._head.data:
+            "If the list is empty or the value is smaller than the head"
+            new_node.next_node = self._head
+            "Insert the new node at the beginning of the list"
+            self._head = new_node
+            return
+
+        current_node = self._head
+        "Traverse the list to find the correct position for insertion"
+        while current_node.next_node and value > current_node.next_node.data:
+            current_node = current_node.next_node
+
+        new_node.next_node = current_node.next_node
+        "Traverse the list to find the correct position for insertion"
+        current_node.next_node = new_node
