@@ -1,3 +1,6 @@
 #!/usr/bin/python3
 
-print(''.join(chr(char) for char in range(122, 64, -1) for case in (lambda x: x, lambda x: x-32) if chr(case(char)).isalnum()), end='')
+for n in range(ord('z'), ord('a') - 1, -1):
+    if n % 2 != 0:
+        n = n - 32
+    print("{:c}".format(n), end='')
