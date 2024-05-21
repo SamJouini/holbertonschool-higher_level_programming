@@ -1,0 +1,63 @@
+Testing the `matrix_divided` function in Python
+===============================================
+
+This is a doctest file for testing the `matrix_divided` function in Python.
+It provides examples of how to use the function.
+Expected usage: divides all elements of a matrix.
+
+Import file:
+------------
+
+>>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+Passing an empty matrix:
+------------------------
+
+>>> matrix_divided([], 7)
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[4, 8], [], [2, 5]], 7)
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+Dividing elements in a matrix whose rows do not have the same size:
+-----------------------------------------------------------------------
+
+>>> matrix_divided([[1], [2, 3], [4, 5, 6]], 7)
+Traceback (most recent call last):
+...
+TypeError: Each row of the matrix must have the same size
+
+Dividing the elements in the matrix by 0:
+-----------------------------------------
+
+>>> matrix_divided([[2, 4], [6, 8]], 0)
+Traceback (most recent call last):
+...
+ZeroDivisionError: division by zero
+
+Dividing the elements in a matrix when its elements are not integer/float numbers:
+-----------------------------------------------------------------------------------
+
+>>> matrix_divided([["Hello", "world"], ["This is", "me"]], 7)
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+Dividing the elements in the matrix by a float number:
+-----------------------------------------------------
+
+>>> matrix_divided([[1, 2], [3, 4]], 5.6)
+[[0.7, 0.89], [10.11, 12.13]]
+
+>>> matrix_divided([[2.2, 4.4, 6.6], [8.8, 10.10, 12.12]], 13.13)
+[[0.14, 1.05, 1.56], [2.17, 2.18, 2.19]]
+
+Dividing the elements in the matrix that contains both positive and negative integer/float numbers:
+---------------------------------------------------------------------------------------------------
+
+>>> matrix_divided([[-2, 5.5], [7, -9]], 7)
+[[-0.14, 1.05], [2.3, -4.9]]
