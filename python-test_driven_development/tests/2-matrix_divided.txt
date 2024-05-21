@@ -50,3 +50,17 @@ TypeError: matrix must be a matrix (list of lists) of integers/floats
     Traceback (most recent call last):
     ...
     TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+
+Passing `div` as a list or a string :
+--------------------------------------
+
+>>> matrix_divided([[2, 4], [6, 8]], [10])
+Traceback (most recent call last):
+...
+TypeError: div must be a number
+
+>>> matrix_divided([[3, 4], [5, 6]], "7")
+Traceback (most recent call last):
+...
+TypeError: div must be a number
