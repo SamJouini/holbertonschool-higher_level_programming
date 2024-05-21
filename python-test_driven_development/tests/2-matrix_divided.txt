@@ -46,17 +46,7 @@ Traceback (most recent call last):
 ...
 TypeError: matrix must be a matrix (list of lists) of integers/floats
 
-
-Dividing the elements in the matrix by a float number:
------------------------------------------------------
->>> matrix_divided([[1, 2], [3, 4]], 5.6)
-[[0.7, 0.89], [10.11, 12.13]]
-
->>> matrix_divided([[2.2, 4.4, 6.6], [8.8, 10.10, 12.12]], 13.13)
-[[0.14, 1.05, 1.56], [2.17, 2.18, 2.19]]
-
-
-Dividing the elements in the matrix that contains both positive and negative integer/float numbers:
----------------------------------------------------------------------------------------------------
->>> matrix_divided([[-2, 5.5], [7, -9]], 7)
-[[-0.14, 1.05], [2.3, -4.9]]
+>>> matrix_divided([["1.2", 3], ["5", 6.7], ["8.9", 10]], 11)
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
