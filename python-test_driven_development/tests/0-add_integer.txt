@@ -85,3 +85,8 @@ TypeError: a must be an integer
 Traceback (most recent call last):
 ...
 TypeError: a must be an integer
+
+>>> add_integer("5", 2)
+Traceback (most recent call last):
+...
+TypeError: a must be an integer
