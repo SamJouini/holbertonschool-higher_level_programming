@@ -2,17 +2,17 @@ Testing the `add_integer` function in Python
 ============================================
 
 This is a doctest file for testing the `add_integer` function in Python.
-The expected usage: add 2 integers using 'add_integer' function.
 It provides examples and of how to use the function.
+Expected usage: add two integers using 'add_integer' function.
+
 
 Import file:
 ------------
-
 >>> add_integer = __import__('0-add_integer').add_integer
+
 
 Integers addition:
 ----------------
-
 >>> add_integer(5, 2)
 7
 
@@ -25,9 +25,9 @@ Integers addition:
 >>> add_integer(-5, -2)
 -7
 
+
 Floats addition:
 --------------
-
 >>> add_integer(5.5, 2.2)
 7
 
@@ -40,9 +40,9 @@ Floats addition:
 >>> add_integer(-5.5, -2.2)
 -7
 
+
 Integer and floats addition:
 --------------------------
-
 >>> add_integer(5, 2.2)
 7
 
@@ -55,17 +55,17 @@ Integer and floats addition:
 >>> add_integer(-5, -2.5)
 -7
 
+
 Adding nothing :
 -----------------
-
 >>> add_integer()
 Traceback (most recent call last):
 ...
 TypeError: add_integer() no integer or float found
 
+
 Handling Invalid Input:
 ----------------------- 
-
 >>> add_integer("five", 2)
 Traceback (most recent call last):
 ...
