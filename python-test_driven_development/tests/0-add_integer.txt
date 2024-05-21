@@ -61,7 +61,7 @@ Adding nothing :
 >>> add_integer()
 Traceback (most recent call last):
 ...
-TypeError: add_integer() no integer or float found
+TypeError: add_integer() missing 1 required positional argument: 'a'
 
 
 Handling Invalid Input:
