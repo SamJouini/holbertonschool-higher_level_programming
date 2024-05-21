@@ -48,12 +48,12 @@ My name is James
 
 First or last name are not a string:
 ------------------------------------
->>> say_my_name(007, "Bond")
+>>> say_my_name(7, "Bond")
 Traceback (most recent call last):
 ...
 TypeError: first_name must be a string
 
->>> say_my_name("James", 007)
+>>> say_my_name("James", 7)
 Traceback (most recent call last):
 ...
 TypeError: last_name must be a string
