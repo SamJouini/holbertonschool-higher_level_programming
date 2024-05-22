@@ -1,8 +1,9 @@
 #!/usr/bin/python3
+" Returns a list of available attributes and methods of an object."
 
 
 def lookup(obj):
-    " Returns a list of available attributes and methods of an object."
+    "obj: The object to inspect."
 
     attributes = []
     for attr in dir(obj):
@@ -15,3 +16,4 @@ def lookup(obj):
         except AttributeError:
             pass
     return attributes
+    " Returns: A list containing the names of available attributes and methods."
