@@ -19,7 +19,7 @@ Testing an empty list:
 
 Testing a list with one element :
 -------------------------------
->>> MyList([42]).print_sorted()
+>>> MyList([5]).print_sorted()
 [5]
 
 
@@ -37,7 +37,7 @@ Testing list with different data types:
 
 
 Testing append:
-------------
+---------------
 >>> my_list = MyList()
 >>> my_list.append(3)
 >>> my_list.append(3)
