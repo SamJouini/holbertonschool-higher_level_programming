@@ -6,14 +6,14 @@ class MyList(list):
     provides a method to print the list in sorted order.
     """
 
+    "Prints the list in ascending sorted order."
     def print_sorted(self):
-        "Prints the list in ascending sorted order."
 
+        sorted_list = sorted(self)
+        print(sorted_list)
         "Create a new sorted list from the elements of the current list"
+
         sorted_list = sorted(self)
+
         print(sorted_list)
-
-        sorted_list = sorted(self)
-
         "Print the sorted list"
-        print(sorted_list)
