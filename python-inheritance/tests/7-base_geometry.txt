@@ -3,22 +3,25 @@ Testinging the `BaseGeometry` class in Python
 
 This is a docTesting file for Testinging the `BaseGeometry` class in Python.
 It provides examples and of how to use the class.
-Expected usage: a class BaseGeometry with public instance method that raises an Exception with the message area() is not implemented
-and that validates value/
+Expected usage: a class BaseGeometry with public instance method that raises an 
+Exception with the message area() is not implemented
+and that validates value.
 
 
 Import file:
 ------------
 >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
-
+>>> base_geometry = BaseGeometry()
 
 Valid input:
 ------------
->>> integer_validator("width", 10)
+>>> base_geometry.integer_validator("width", 10)
+
+
 
 Testing area:
-----------
->>> BaseGeometry.area()
+-------------
+>>> base_geometry.area()
 Traceback (most recent call last):
     ...
 Exception: area() is not implemented
@@ -26,23 +29,23 @@ Exception: area() is not implemented
 
 Testing with no argument:
 ---------------------
->>> BaseGeometry.integer_validator()
+>>> base_geometry.integer_validator()
 Traceback (most recent call last):
 ...
-TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'valuBaseGeometrye'
+TypeError: BaseGeometry.integer_validator() missing 2 required positional arguments: 'name' and 'value'
 
 
 Testing with only 1 arguments:
 ---------------------------
->>> integer_validator("age")
+>>> base_geometry.integer_validator("age")
 Traceback (most recent call last):
 ...
-TypeError: integer_validator() missing 1 required positional argument: 'value'
+TypeError: BaseGeometry.integer_validator() missing 1 required positional argument: 'value'
 
 
 Testing integer_validator method with non-integer input:
 ------------------------------------------------------
->>> integer_validator("height", "ten")
+>>> base_geometry.integer_validator("height", "ten")
 Traceback (most recent call last):
     ...
 TypeError: height must be an integer
@@ -50,22 +53,22 @@ TypeError: height must be an integer
 
 Testing with invalid argument:
 ---------------------------
->>> BaseGeometry.integer_validator("age", (52,))
+>>> base_geometry.integer_validator("age", (52,))
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
->>> BaseGeometry.integer_validator("age", [3])
+>>> base_geometry.integer_validator("age", [3])
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
->>> BaseGeometry.integer_validator("age", {5, 9})
+>>> base_geometry.integer_validator("age", {5, 9})
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
->>> BaseGeometry.integer_validator("age", True)
+>>> base_geometry.integer_validator("age", True)
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
@@ -73,7 +76,7 @@ TypeError: age must be an integer
 
 Testing integer_validator method with integer less than 1:
 -------------------------------------------------------
->>> BaseGeometry.integer_validator("side", 0)
+>>> base_geometry.integer_validator("side", 0)
 Traceback (most recent call last):
     ...
 ValueError: side must be greater than 0
@@ -81,7 +84,7 @@ ValueError: side must be greater than 0
 
 Testing integer_validator method with valid input as float:
 --------------------------------------------------------
->>> BaseGeometry.integer_validator("length", 8.5)
+>>> base_geometry.integer_validator("length", 8.5)
 Traceback (most recent call last):
     ...
 TypeError: length must be an integer
@@ -89,7 +92,7 @@ TypeError: length must be an integer
 
 Testing integer_validator method with None input:
 -----------------------------------------------
->>> BaseGeometry.integer_validator("width", None)
+>>> base_geometry.integer_validator("width", None)
 Traceback (most recent call last):
     ...
 TypeError: width must be an integer
