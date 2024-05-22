@@ -16,4 +16,7 @@ def lookup(obj):
         except AttributeError:
             pass
     return attributes
-    " Returns: A list containing the names of available attributes and methods."
+    """
+    Returns: A list containing the names
+    of available attributes and methods.
+    """
