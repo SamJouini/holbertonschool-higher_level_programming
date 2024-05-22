@@ -7,22 +7,28 @@ class Animal(ABC):
     "Define the abstract base class Animal that inherits from ABC"
     @abstractmethod
     def sound(self):
-        "Declare an abstract method named sound"
+        """
+        Declare an abstract method named sound
+        Abstract methods don't have an implementation in the base class
+        """
         pass
-    "Abstract methods don't have an implementation in the base class"
 
 
 class Dog(Animal):
     "Define the concrete subclass Dog that inherits from Animal"
     def sound(self):
-        "Implement the sound method from the base class"
+        """
+        Implement the sound method from the base class
+        Return: the string Bark when the sound method is called on a Dog object
+        """
         return "Bark"
-    "Return the string Bark when the sound method is called on a Dog object"
 
 
 class Cat(Animal):
     "Define the concrete subclass Cat that inherits from Animal"
     def sound(self):
-        "Implement the sound method from the base class"
+        """
+        Implement the sound method from the base class
+        Return: the string Meow when the sound method is called on a Cat object
+        """
         return "Meow"
-    "Return the string Meow when the sound method is called on a Cat object"
