@@ -20,7 +20,7 @@ TypeError: matrix must be a matrix (list of lists) of integers/floats
 >>> matrix_divided([[4, 8], [], [2, 5]], 7)
 Traceback (most recent call last):
 ...
-TypeError: matrix must be a matrix (list of lists) of integers/floats
+TypeError: Each row of the matrix must have the same size
 
 
 Dividing the elements in the matrix by 0:
@@ -47,9 +47,14 @@ Traceback (most recent call last):
 TypeError: matrix must be a matrix (list of lists) of integers/floats
 
 >>> matrix_divided([["1.2", 3], ["5", 6.7], ["8.9", 10]], 11)
-    Traceback (most recent call last):
-    ...
-    TypeError: matrix must be a matrix (list of lists) of integers/floats
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[3, "9"], [15 , 3]], 3)
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
 
 
 Passing `div` as a list or a string :
