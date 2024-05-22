@@ -10,7 +10,7 @@ def lookup(obj):
         try:
             value = getattr(obj, attr)
             if callable(value):
-                attributes.append(f"{attr}()")
+                attributes.append(f"{attr}")
             else:
                 attributes.append(attr)
         except AttributeError:
