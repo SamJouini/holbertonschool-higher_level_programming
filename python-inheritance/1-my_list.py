@@ -9,5 +9,11 @@ class MyList(list):
     def print_sorted(self):
         "Prints the list in ascending sorted order."
 
+        "Create a new sorted list from the elements of the current list"
         sorted_list = sorted(self)
+        print(sorted_list)
+
+        sorted_list = sorted(self)
+
+        "Print the sorted list"
         print(sorted_list)
