@@ -18,7 +18,7 @@ def class_to_json(obj):
         dict: A dictionary representation of the object's attributes.
     """
     obj_dict = {}
-    for attr, value in obj.__dict__.items():
+    for attr, value in vars(obj).items():
         if isinstance(value, (list, dict, str, int, bool)):
             obj_dict[attr] = value
         else:
