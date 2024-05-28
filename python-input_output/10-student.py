@@ -30,10 +30,14 @@ class Student:
             dict: A dictionary representation of the Student instance.
         """
         if attrs is None:
-            return self.__dict__
-        else:
             return {
-                key: value
-                for key, value in self.__dict__.items()
-                if key in attrs
+                'last_name': self.last_name,
+                'first_name': self.first_name,
+                'age': self.age
             }
+        else:
+            student_dict = {}
+            for attr in attrs:
+                if hasattr(self, attr):
+                    student_dict[attr] = getattr(self, attr)
+            return student_dict
