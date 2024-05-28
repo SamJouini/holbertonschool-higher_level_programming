@@ -52,4 +52,5 @@ class Student:
             and their corresponding values.
         """
     for attr, value in json.items():
-        setattr(self, attr, value)
+        if hasattr(self, attr):
+            setattr(self, attr, value)
