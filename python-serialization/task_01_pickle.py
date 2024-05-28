@@ -5,6 +5,7 @@ to serialize a Python dictionary to a JSON file and
 deserialize the JSON file to recreate the Python Dictionary.
 """
 import pickle
+import json
 
 
 class CustomObject:
