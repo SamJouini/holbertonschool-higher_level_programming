@@ -21,7 +21,8 @@ class Student:
 
         Args:
             attrs (list, optional): A list of attribute names to be retrieved.
-                If provided, only the specified attributes will be included in the dictionary.
+                If provided, only the specified attributes
+                will be included in the dictionary.
                 If not provided or None, all attributes will be included.
 
         Returns:
@@ -29,8 +30,8 @@ class Student:
         """
         if attrs is None:
             return {
-                'first_name': self.first_name,
                 'last_name': self.last_name,
+                'first_name': self.first_name,
                 'age': self.age
             }
         else:
@@ -39,4 +40,3 @@ class Student:
                 if hasattr(self, attr):
                     student_dict[attr] = getattr(self, attr)
             return student_dict
-
