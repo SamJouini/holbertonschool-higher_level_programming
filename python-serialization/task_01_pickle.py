@@ -51,8 +51,7 @@ class CustomObject:
         try:
             with open(filename, 'wb') as file:
                 pickle.dump(self, file)
-        except Exception as e:
-            print("Error serializing object: {0}".format(e))
+        except Exception:
             return None
 
     @classmethod
@@ -72,6 +71,9 @@ class CustomObject:
             with open(filename, 'rb') as file:
                 obj = pickle.load(file)
             return obj
-        except (FileNotFoundError, pickle.UnpicklingError) as e:
-            print("Error deserializing object: {0}".format(e))
+        except (FileNotFoundError, pickle.UnpicklingError):
             return None
+
+    def display(self):
+        "Displays the object's attributes in a formatted way."
+        print(self.__str__())
