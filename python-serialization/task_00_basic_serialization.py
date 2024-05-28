@@ -5,7 +5,7 @@ to serialize a Python dictionary to a JSON file
 and deserialize the JSON file to recreate the Python Dictionary
 """
 
-import json
+import pickle
 
 
 def serialize_and_save_to_file(data, filename):
