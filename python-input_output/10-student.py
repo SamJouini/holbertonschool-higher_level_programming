@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 "Write a class Student that defines a student"
 
+
 class Student:
     def __init__(self, first_name, last_name, age):
         """
@@ -29,14 +30,10 @@ class Student:
             dict: A dictionary representation of the Student instance.
         """
         if attrs is None:
-            return {
-                'last_name': self.last_name,
-                'first_name': self.first_name,
-                'age': self.age
-            }
+            return self.__dict__
         else:
-            student_dict = {}
-            for attr in attrs:
-                if hasattr(self, attr):
-                    student_dict[attr] = getattr(self, attr)
-            return student_dict
+            return {
+                key: value
+                for key, value in self.__dict__.items()
+                if key in attrs
+            }
