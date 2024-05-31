@@ -13,6 +13,13 @@ This line imports the necessary modules from the Flask framework:
 - request: An object that represents the incoming HTTP request.
 """
 
+# In-memory data store
+users = {}
+"""
+This is an in-memory data store (a Python dictionary) that holds user data.
+
+"""
+
 
 app = Flask(__name__)
 """
@@ -22,17 +29,11 @@ of the current module. This is a common convention in Flask applications, as
 it helps Flask determine the root path of the application.
 """
 
-# In-memory data store
-users = {}
-"""
-This is an in-memory data store (a Python dictionary) that holds user data.
-
-"""
-
 
 @app.route('/')   # Creating Your First Endpoint
 def home():
-    return "Welcome to the Flask API!"
+    text = "Welcome to the Flask API!"
+    return text
     """
     This defines a route for the root URL (/) using the @app.route decorator.
     The home() function is associated with this route and returns the string
@@ -42,7 +43,7 @@ def home():
 
 @app.route('/data')   # Serving JSON Data
 def get_data():
-    return jsonify(list(users.values()))
+    return jsonify(list(users.keys))
     """
     This defines a route for the /data URL.
     The get_data() function is associated with this route
@@ -84,8 +85,13 @@ def add_user():
 
     new_user = request.get_json()
     username = new_user['username']
-    users[username] = new_user
-    return jsonify(new_user), 201
+    users[username] = {
+        "username": user_data.get("username"),
+        "name": user_data.get("name"),
+        "age": user_data.get("age"),
+        "city": user_data.get("city")
+    }
+    return jsonify({"message": "User added", "user": users[username]}), 201
     """
     This defines a route for the /add_user URL that accepts POST requests.
     The add_user() function is associated with this route
