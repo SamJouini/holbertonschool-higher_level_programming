@@ -32,8 +32,7 @@ it helps Flask determine the root path of the application.
 
 @app.route('/')   # Creating Your First Endpoint
 def home():
-    text = "Welcome to the Flask API!"
-    return text
+    return "Welcome to the Flask API!"
     """
     This defines a route for the root URL (/) using the @app.route decorator.
     The home() function is associated with this route and returns the string
@@ -43,8 +42,7 @@ def home():
 
 @app.route('/data')   # Serving JSON Data
 def get_data():
-    usernames = list(users.keys())
-    return jsonify(usernames)
+    return jsonify(list(users.keys()))
     """
     This defines a route for the /data URL.
     The get_data() function is associated with this route
