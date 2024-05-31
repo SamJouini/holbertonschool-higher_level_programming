@@ -9,7 +9,6 @@ import json
 
 class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
-
     def do_GET(self):
         if self.path == '/data':
             self.send_response(200)
@@ -22,6 +21,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
             self.wfile.write(b"Hello, this is a simple API!")
+
 
 if __name__ == '__main__':
     server_address = ('', 8000)
