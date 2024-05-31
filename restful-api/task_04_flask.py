@@ -86,10 +86,10 @@ def add_user():
     new_user = request.get_json()
     username = new_user['username']
     users[username] = {
-        "username": user_data.get("username"),
-        "name": user_data.get("name"),
-        "age": user_data.get("age"),
-        "city": user_data.get("city")
+        "username": new_user.get("username"),
+        "name": new_user.get("name"),
+        "age": new_user.get("age"),
+        "city": new_user.get("city")
     }
     return jsonify({"message": "User added", "user": users[username]}), 201
     """
