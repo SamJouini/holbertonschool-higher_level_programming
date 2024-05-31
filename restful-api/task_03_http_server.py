@@ -42,16 +42,16 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             # Send a simple message as the response body
             self.wfile.write(b"Hello, this is a simple API!")
 
-        if __name__ == '__main__':
-            """
-            This block is executed when the script
-            is run directly (not imported as a module).
-            It starts the HTTP server and listens for incoming requests.
-            """
-            server_address = ('', 8000)
-            # Set the server address to listen on all available interfaces
-            httpd = http.server.\
-                HTTPServer(server_address, SimpleHTTPRequestHandler)
-            print('Starting server on http://localhost:8000')
-            httpd.serve_forever()
-            # Start the server and listen for incoming requests indefinitely
+if __name__ == '__main__':
+    """
+    This block is executed when the script
+    is run directly (not imported as a module).
+    It starts the HTTP server and listens for incoming requests.
+    """
+    server_address = ('', 8000)
+    # Set the server address to listen on all available interfaces
+    httpd = http.server.\
+        HTTPServer(server_address, SimpleHTTPRequestHandler)
+    print('Starting server on http://localhost:8000')
+    httpd.serve_forever()
+    # Start the server and listen for incoming requests indefinitely
