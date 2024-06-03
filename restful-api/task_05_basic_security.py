@@ -11,6 +11,8 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import verify_jwt_in_request
 
+app = Flask(__name__)  # Creating a Flask application instance
+auth = HTTPBasicAuth()  # Creating an instance of HTTPBasicAuth
 
 users = {
     "user1": {
@@ -30,8 +32,11 @@ example, it contains two users: an admin user and a regular user. The passwords
 are hashed using the generate_password_hash function from werkzeug.security.
 """
 
-app = Flask(__name__)  # Creating a Flask application instance
-auth = HTTPBasicAuth()  # Creating an instance of HTTPBasicAuth
+app.config['JWT_SECRET_KEY'] = 'the_secret_key'
+jwt = JWTManager(app)
+"""
+This line initializes the JWTManager with the Flask application instance.
+"""
 
 
 @auth.verify_password
@@ -54,7 +59,7 @@ def verify_password(username, password):
     if user and check_password_hash(user["password"], password):
         # If the user exists and the provided
         # password matches the hashed password
-        return username
+        return user
         # Return the username, indicating successful authentication
     return None
     # Return None, indicating authentication failure
@@ -75,7 +80,7 @@ def home():
     return "Welcome to the Flask API!"
 
 
-@app.route("/basic-protected")
+@app.route('/basic-protected', methods=['GET'])
 @auth.login_required
 def basic_protected():
     """
@@ -89,11 +94,6 @@ def basic_protected():
         basic authentication was successful.
     """
     return "Basic Auth: Access Granted"
-
-    jwt = JWTManager(app)
-    """
-    This line initializes the JWTManager with the Flask application instance.
-    """
 
 
 @app.route("/login", methods=["POST"])
@@ -139,10 +139,10 @@ def login():
         access_token = create_access_token(identity=username)
         return jsonify(access_token=access_token), 200
     else:
-        return jsonify({"message": "Bad username or password"}), 401
+        return jsonify({"error": "Invalid credentials"}), 401
 
 
-@app.route("/jwt-protected")
+@app.route('/jwt-protected', methods=['GET'])
 @jwt_required()
 def jwt_protected():
     """
@@ -178,111 +178,117 @@ def admin_only():
                 "error": "Admin access required"
             }
     """
-    current_user = get_jwt_identity()
+    current_username = get_jwt_identity()
+    current_user = users.get(current_username)
     if current_user['role'] != 'admin':
         return jsonify({"error": "Admin access required"}), 403
     return "Admin Access: Granted"
 
-    @jwt.unauthorized_loader
-    def handle_unauthorized_error(err):
-        """
-        Error handler for unauthorized access with JWT authentication.
 
-        This function is called when a request is made
-        without a valid JWT access token.
+@jwt.unauthorized_loader
+def handle_unauthorized_error(err):
+    """
+    Error handler for unauthorized access with JWT authentication.
 
-        Args:
-            err (Exception): The exception object raised by Flask-JWT-Extended.
+    This function is called when a request is made
+    without a valid JWT access token.
 
-        Returns:
-            JSON response with an error message
-            and a 401 Unauthorized status code.
-            {
-                "error": "Missing or invalid token"
-            }
-        """
-        return jsonify({"error": "Missing or invalid token"}), 401
+    Args:
+        err (Exception): The exception object raised by Flask-JWT-Extended.
 
-    @jwt.invalid_token_loader
-    def handle_invalid_token_error(err):
-        """
-        Error handler for invalid JWT access tokens.
+    Returns:
+        JSON response with an error message
+        and a 401 Unauthorized status code.
+        {
+            "error": "Missing or invalid token"
+        }
+    """
+    return jsonify({"error": "Missing or invalid token"}), 401
 
-        This function is called when a request is made
-        with an invalid JWT access token.
 
-        Args:
-            err (Exception): The exception object raised by Flask-JWT-Extended.
+@jwt.invalid_token_loader
+def handle_invalid_token_error(err):
+    """
+    Error handler for invalid JWT access tokens.
 
-        Returns:
-            JSON response with an error message
-            and a 401 Unauthorized status code.
-            {
-                "error": "Invalid token"
-            }
-        """
-        return jsonify({"error": "Invalid token"}), 401
+    This function is called when a request is made
+    with an invalid JWT access token.
 
-    @jwt.expired_token_loader
-    def handle_expired_token_error(err):
-        """
-        Error handler for expired JWT access tokens.
+    Args:
+        err (Exception): The exception object raised by Flask-JWT-Extended.
 
-        This function is called when a request is made
-        with an expired JWT access token.
+    Returns:
+        JSON response with an error message
+        and a 401 Unauthorized status code.
+        {
+            "error": "Invalid token"
+        }
+    """
+    return jsonify({"error": "Invalid token"}), 401
 
-        Args:
-            err (Exception): The exception object raised by Flask-JWT-Extended.
 
-        Returns:
-            JSON response with an error message
-            and a 401 Unauthorized status code.
-            {
-                "error": "Token has expired"
-            }
-        """
-        return jsonify({"error": "Token has expired"}), 401
+@jwt.expired_token_loader
+def handle_expired_token_error(err):
+    """
+    Error handler for expired JWT access tokens.
 
-    @jwt.revoked_token_loader
-    def handle_revoked_token_error(err):
-        """
-        Error handler for revoked JWT access tokens.
+    This function is called when a request is made
+    with an expired JWT access token.
 
-        This function is called when a request is
-        made with a revoked JWT access token.
+    Args:
+        err (Exception): The exception object raised by Flask-JWT-Extended.
 
-        Args:
-            err (Exception): The exception object raised by Flask-JWT-Extended.
+    Returns:
+        JSON response with an error message
+        and a 401 Unauthorized status code.
+        {
+            "error": "Token has expired"
+        }
+    """
+    return jsonify({"error": "Token has expired"}), 401
 
-        Returns:
-            JSON response with an error message and
-            a 401 Unauthorized status code.
-            {
-                "error": "Token has been revoked"
-            }
-        """
-        return jsonify({"error": "Token has been revoked"}), 401
 
-    @jwt.needs_fresh_token_loader
-    def handle_needs_fresh_token_error(err):
-        """
-        Error handler for requests that require a fresh JWT access token.
+@jwt.revoked_token_loader
+def handle_revoked_token_error(err):
+    """
+    Error handler for revoked JWT access tokens.
 
-        This function is called when a request requires
-        a fresh JWT access token,
-        but the provided token is not fresh.
+    This function is called when a request is
+    made with a revoked JWT access token.
 
-        Args:
-            err (Exception): The exception object raised by Flask-JWT-Extended.
+    Args:
+        err (Exception): The exception object raised by Flask-JWT-Extended.
 
-        Returns:
-            JSON response with an error message
-            and a 401 Unauthorized status code.
-            {
-                "error": "Fresh token required"
-            }
-        """
-        return jsonify({"error": "Fresh token required"}), 401
+    Returns:
+        JSON response with an error message and
+        a 401 Unauthorized status code.
+        {
+            "error": "Token has been revoked"
+        }
+    """
+    return jsonify({"error": "Token has been revoked"}), 401
+
+
+@jwt.needs_fresh_token_loader
+def handle_needs_fresh_token_error(err):
+    """
+    Error handler for requests that require a fresh JWT access token.
+
+    This function is called when a request requires
+    a fresh JWT access token,
+    but the provided token is not fresh.
+
+    Args:
+        err (Exception): The exception object raised by Flask-JWT-Extended.
+
+    Returns:
+        JSON response with an error message
+        and a 401 Unauthorized status code.
+        {
+            "error": "Fresh token required"
+        }
+    """
+    return jsonify({"error": "Fresh token required"}), 401
 
 
 if __name__ == '__main__':
