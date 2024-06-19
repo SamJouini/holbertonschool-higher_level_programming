@@ -1,9 +1,9 @@
 -- List all cities for the state with the retrieved id
-SELECT cities.id, cities.name
+SELECT id, name
 FROM cities
 WHERE state_id = (
     SELECT id
     FROM states
     WHERE name = 'California'
 )
-ORDER BY cities.id ASC;
+ORDER BY cities.id;
