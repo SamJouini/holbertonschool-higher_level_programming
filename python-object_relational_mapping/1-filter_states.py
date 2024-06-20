@@ -4,19 +4,16 @@
 # N (upper N) from the database hbtn_0e_0_usa
 
 import MySQLdb
-from sys import argv
+import sys
 
 if __name__ == "__main__":
-    # Get the arguments
-    username = argv[1]
-    password = argv[2]
-    database_name = argv[3]
 
     # Connect to the database
-    db = MySQLdb.connect(host="localhost", port=3306,
-                         user=username,
-                         passwd=password,
-                         db=database_name)
+    db = MySQLdb.connect(host="localhost",
+                         port=3306,
+                         user=sys.argv[1],
+                         passwd=sys.argv[2],
+                         db=sys.argv[3])
 
     # Create a cursor object
     cursor = db.cursor()
