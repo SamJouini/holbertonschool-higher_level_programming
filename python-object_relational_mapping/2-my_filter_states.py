@@ -18,8 +18,8 @@ if __name__ == "__main__":
 
     # Execute the SQL query
     query = ( "SELECT * FROM states"
-              "WHERE name LIKE = '{}' "
-              "ORDER BY id ASC".format(sys.argv[4]))
+              "LIKE '{}' order"
+              "ORDER BY id ASC;".format(sys.argv[4]))
     cursor.execute(query)
 
     # Fetch all the rows
