@@ -25,7 +25,7 @@ if __name__ == "__main__":
     session = Session()
 
     """ Query the first State object ordered by states.id """
-    first_state = session.query(State).order_by(State.id).first()
+    first_state = session.query(State).first()
 
     """  Display the result """
     if first_state:
