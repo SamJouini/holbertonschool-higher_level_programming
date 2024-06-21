@@ -23,21 +23,17 @@ if __name__ == "__main__":
     state_name = sys.argv[4]
 
     """ Execute the SQL query to fetch cities of the given state """
-    query = ("SELECT cities.name"
-             "FROM cities"
+    cursor.execute("SELECT cities.name"
+             "FROM cities "
              "JOIN states ON cities.state_id = states.id"
              "WHERE states.name = %s"
              " ORDER BY cities.id ASC", (state_name,))
-    cursor.execute(query)
-
+  
     """ Fetch all the rows """
-    cities = cursor.fetchall()
+    inception_of_rows = rows = cursor.fetchall()
 
     """ Display the results """
-    if cities:
-        print(", ".join(city[0] for city in cities))
-    else:
-        print()
+    print(", ".join(row[0] for row in inception_of_rows))
 
     """ Close the cursor and database connection """
     cursor.close()
