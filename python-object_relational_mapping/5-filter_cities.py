@@ -13,7 +13,8 @@ if __name__ == "__main__":
         port=3306,
         user=sys.argv[1],
         passwd=sys.argv[2],
-        db=sys.argv[3]
+        db=sys.argv[3],
+        state_name = sys.argv[4]
     )
 
     """  Create a cursor object to execute SQL queries """
