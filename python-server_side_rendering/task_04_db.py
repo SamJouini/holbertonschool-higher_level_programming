@@ -1,38 +1,48 @@
 from flask import Flask, render_template, request
-import sqlite3
+import json
+import csv
 
 app = Flask(__name__)
 
+def read_json_file(filename):
+    with open(filename, 'r') as f:
+        return json.load(f)
+
+def read_csv_file(filename):
+    products = []
+    with open(filename, 'r') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            products.append({
+                "id": int(row["id"]),
+                "name": row["name"],
+                "category": row["category"],
+                "price": float(row["price"])
+            })
+    return products
+
 @app.route('/products')
-def show_products():
+def products():
     source = request.args.get('source')
-    products_list = []
+    product_id = request.args.get('id')
 
-    if source == 'sql':
-        try:
-            conn = sqlite3.connect('products.db')
-            cursor = conn.cursor()
-            cursor.execute('SELECT id, name, category, price FROM Products')
-            products = cursor.fetchall()
-            conn.close()
-
-            # Convert tuple data to dictionary for easier access in the template
-            for product in products:
-                products_list.append({
-                    'id': product[0],
-                    'name': product[1],
-                    'category': product[2],
-                    'price': product[3]
-                })
-        except sqlite3.Error as e:
-            # Log the error and return a generic error message or render an error template
-            print(f"Database error: {e}")
-            return render_template('error.html', message="An error occurred accessing the database.")
+    if source == 'json':
+        data = read_json_file('products.json')
+    elif source == 'csv':
+        data = read_csv_file('products.csv')
     else:
-        # If source is not 'sql' or another expected value, return "Wrong source" error message
-        return render_template('error.html', message="Wrong source")
+        return render_template('product_display.html', error="Wrong source")
 
-    return render_template('product_display.html', products=products_list)
+    if product_id:
+        try:
+            product_id = int(product_id)
+            data = [product for product in data if product['id'] == product_id]
+            if not data:
+                return render_template('product_display.html', error="Product not found")
+        except ValueError:
+            return render_template('product_display.html', error="Invalid product id")
+
+    return render_template('product_display.html', products=data)
 
 if __name__ == '__main__':
     app.run(debug=True)
